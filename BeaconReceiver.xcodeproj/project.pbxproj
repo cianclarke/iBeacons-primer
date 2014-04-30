@@ -21,6 +21,7 @@
 		B10A2B1719102E8F00A61644 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B10A2AF919102E8F00A61644 /* UIKit.framework */; };
 		B10A2B1F19102E8F00A61644 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B10A2B1D19102E8F00A61644 /* InfoPlist.strings */; };
 		B10A2B2119102E8F00A61644 /* BeaconReceiverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B10A2B2019102E8F00A61644 /* BeaconReceiverTests.m */; };
+		B10A2B2B1910300100A61644 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B10A2B2A1910300100A61644 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		B10A2B1C19102E8F00A61644 /* BeaconReceiverTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconReceiverTests-Info.plist"; sourceTree = "<group>"; };
 		B10A2B1E19102E8F00A61644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B10A2B2019102E8F00A61644 /* BeaconReceiverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconReceiverTests.m; sourceTree = "<group>"; };
+		B10A2B2A1910300100A61644 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B10A2B2B1910300100A61644 /* CoreLocation.framework in Frameworks */,
 				B10A2AF819102E8F00A61644 /* CoreGraphics.framework in Frameworks */,
 				B10A2AFA19102E8F00A61644 /* UIKit.framework in Frameworks */,
 				B10A2AF619102E8F00A61644 /* Foundation.framework in Frameworks */,
@@ -101,6 +104,7 @@
 		B10A2AF419102E8F00A61644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B10A2B2A1910300100A61644 /* CoreLocation.framework */,
 				B10A2AF519102E8F00A61644 /* Foundation.framework */,
 				B10A2AF719102E8F00A61644 /* CoreGraphics.framework */,
 				B10A2AF919102E8F00A61644 /* UIKit.framework */,
@@ -379,7 +383,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeaconReceiver/BeaconReceiver-Prefix.pch";
 				INFOPLIST_FILE = "BeaconReceiver/BeaconReceiver-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -392,7 +398,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeaconReceiver/BeaconReceiver-Prefix.pch";
 				INFOPLIST_FILE = "BeaconReceiver/BeaconReceiver-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -456,6 +464,7 @@
 				B10A2B2619102E8F00A61644 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B10A2B2719102E8F00A61644 /* Build configuration list for PBXNativeTarget "BeaconReceiverTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +473,7 @@
 				B10A2B2919102E8F00A61644 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
