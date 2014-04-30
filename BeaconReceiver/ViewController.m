@@ -74,7 +74,9 @@
         // You can retrieve the beacon data from its properties
         NSString *uuid = nearestBeacon.proximityUUID.UUIDString;
 
+        int major = [nearestBeacon.minor intValue];
         int minor = [nearestBeacon.minor intValue];
+        NSLog(@"Major ID of this beacon is %d, minor is %d", major, minor);
         
         
         switch (minor)
