@@ -6,6 +6,8 @@
 //
 
 #import "ViewController.h"
+#import <FH/FH.h>
+#import <FH/FHResponse.h>
 
 @interface ViewController ()
 
@@ -37,6 +39,18 @@
 
 
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    
+    void (^success)(FHResponse *)=^(FHResponse * res){
+        //Call any other FH APIs after init suceeds
+    };
+    
+    void (^failure)(id)=^(FHResponse * res){
+        NSLog(@"FH init failed. Response = %@", res.rawResponse);
+    };
+    
+    //View loaded, you can uncomment the following code to init FH object
+    //[FH initWithSuccess:success AndFailure:failure];
+
 }
 
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion*)region
