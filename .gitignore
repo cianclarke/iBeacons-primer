@@ -12,11 +12,7 @@
 /resources/docs
 /docs/*
 node_modules
-<<<<<<< HEAD
 fhc*
-=======
-# fhc*
->>>>>>> sprint1
 client/default/archive
 ios/www/*
 android/assets/www/*
@@ -140,3 +136,8 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
+=======
+build/*
+*.xcworkspace
+xcuserdata
+>>>>>>> 78d2ba5caff94c98ac962bab27189e75b0ab0c05
