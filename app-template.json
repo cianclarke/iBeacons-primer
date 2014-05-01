@@ -1,0 +1,9 @@
+{
+  "id": "blank_native_ios_client",
+  "name": "Blank Native iOS Client",
+  "type": "client_native_ios",
+  "repoUrl": "git://github.com/feedhenry/fh-ios-sdk-blank-app.git",
+  "repoBranch": "refs/heads/6066-connection-bugfixing",
+  "icon": "icon-apple",
+  "category": "Blank Apps"
+}
