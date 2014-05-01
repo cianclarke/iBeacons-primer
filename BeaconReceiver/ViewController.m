@@ -6,8 +6,8 @@
 //
 
 #import "ViewController.h"
-#import <FH/FH.h>
-#import <FH/FHResponse.h>
+#import "FH/FH.h"
+#import "FH/FHResponse.h"
 
 @interface ViewController ()
 
@@ -33,24 +33,27 @@
     // Tell location manager to start monitoring for the beacon region
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
     
-    self.statusLabel.text = @"Searching for beacons...";
-    self.subLabel.text = @"";
+    self.statusLabel.text = @"Searching";
+    self.subLabel.text = @"Here beacons beacons...";
     self.view.backgroundColor = [UIColor blackColor];
-
-
-    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
     
     void (^success)(FHResponse *)=^(FHResponse * res){
-        //Call any other FH APIs after init suceeds
+        FHActRequest * action = (FHActRequest *) [FH buildActRequest:@"beacons" WithArgs:[NSDictionary dictionary]];
+        [action execAsyncWithSuccess:^(FHResponse * actRes){
+            [self setBeaconData: [actRes parsedResponse]];
+            // Now that we have the beacon data, start looking for beacons!
+            [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+        } AndFailure:^(FHResponse * actFailRes){
+            NSLog(@"Failed to read beacon data. Response = %@", actFailRes.rawResponse);
+        }];
+
     };
     
     void (^failure)(id)=^(FHResponse * res){
         NSLog(@"FH init failed. Response = %@", res.rawResponse);
     };
     
-    //View loaded, you can uncomment the following code to init FH object
-    //[FH initWithSuccess:success AndFailure:failure];
-
+    [FH initWithSuccess:success AndFailure:failure];
 }
 
 - (void)locationManager:(CLLocationManager*)manager didEnterRegion:(CLRegion*)region
@@ -86,41 +89,19 @@
         CLBeacon *nearestBeacon = [nearbyBeacons firstObject];
         
         // You can retrieve the beacon data from its properties
-        NSString *uuid = nearestBeacon.proximityUUID.UUIDString;
+        NSDictionary *beaconConfig = [self.beaconData objectForKey: [nearestBeacon.minor stringValue]];
+        label = [beaconConfig objectForKey:@"label"];
+        sublabel = [beaconConfig objectForKey:@"sublabel"];
+        // Make a hex background color from our object config string : http://stackoverflow.com/questions/3056757/how-to-convert-an-nsstring-to-hex-values
+        NSMutableString *tempHex=[[NSMutableString alloc] init];
+        [tempHex appendString:@"0x"];
+        [tempHex appendString:[beaconConfig objectForKey:@"color"]];
+        unsigned colorInt = 0;
+        [[NSScanner scannerWithString:tempHex] scanHexInt:&colorInt];
 
-        int major = [nearestBeacon.minor intValue];
-        int minor = [nearestBeacon.minor intValue];
-        NSLog(@"Major ID of this beacon is %d, minor is %d", major, minor);
-        
-        
-        switch (minor)
-        {
-            // Take note of your minor IDs and replace them in this switch..
-            case 4977:
-                label = @"Product Office";
-                sublabel = @"Serious work happens here";
-                background = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
-                break;
-            case 4990:
-                label = @"Sales Office";
-                sublabel = @"Careful - salesguys abound";
-                background = [UIColor redColor];
-                break;
-            case 4929:
-                label = @"Biz";
-                sublabel = @"D'business";
-                background = [UIColor orangeColor];
-                break;
-            default:
-                label = @"Where?";
-                sublabel = @"Not sure where we are";
-                background = [UIColor orangeColor];
-                break;
-        }
-        NSLog(@"uuid: %@", uuid);
-        NSLog(@"prox: %d", nearestBeacon.proximity);
+        background = UIColorFromRGB(colorInt);
+
     }
-    
 
     self.statusLabel.text = label;
     self.subLabel.text = sublabel;
