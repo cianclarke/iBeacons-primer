@@ -11,6 +11,9 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *xLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yLabel;
+@property (weak, nonatomic) IBOutlet UILabel *beaconCount;
 
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -18,5 +21,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subLabel;
 @property (strong, nonatomic) IBOutlet UIView *view;
-
+- (double)calculateAccuracyWithRSSI:(double)rssi;
 @end
